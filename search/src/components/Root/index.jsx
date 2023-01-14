@@ -5,20 +5,29 @@ import styles from './index.module.scss'
 import axios from 'axios'
 function Index() {
  const[cardsData,setCardsData]=useState([])
-
+ const [toSort,setToSort]=useState('')
 
 
  const handleSearch= async (query)=>{
-    let response= await  axios.get(`https://api.github.com/search/repositories?q=${query}`)
-  
+   try{
+     let response= await  axios.get(`https://api.github.com/search/repositories?q=${query}`)
+    console.log(response.data.items,"response.data.items")
     if(response.data.items){
         setCardsData(response.data.items)
+        setToSort('')
     }else{
         setCardsData([])
-        alert("Something went wrong")
+        setToSort('')
+        
     }
+   }
+   catch(err){
+    setCardsData([])
+    setToSort('')
+   }
  }
  const handleSort=(criteria)=>{
+    setToSort(criteria)
      const sortedData = [...cardsData].sort((a, b) => {
         switch (criteria) {
             case 'stars':
@@ -50,6 +59,7 @@ function Index() {
         onChange={(e)=>{
             handleSort(e.target.value)
         }}
+        value={toSort}
         >
             <option value="">Select an option</option>
             <option value="stars">Stars</option>
