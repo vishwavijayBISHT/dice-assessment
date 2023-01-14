@@ -9,7 +9,7 @@ This is a ReactJS application that allows users to search for public repositorie
 1. Clone the repository to your local machine
 
 ```bash
-git clone https://github.com/<username>/github-repo-search.git
+git clone https://github.com/vishwavijayBISHT/dice-assessment.git
 ```
 
 2. Install the necessary dependencies
